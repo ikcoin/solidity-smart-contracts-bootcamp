@@ -6,6 +6,7 @@ import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 
 contract FundMe {
     mapping(address => uint256) public addressToAmountFunded;
+    address[] public funders;
     address contractOwner;
 
     constructor() public {
@@ -18,6 +19,7 @@ contract FundMe {
         require(msg.value >= minimumUSD, "Not enough ETH. ");
 
         addressToAmountFunded[msg.sender] += msg.value;
+        funders.push(msg.sender);
     }
 
     function getVersion() public view returns (uint256) {
@@ -53,5 +55,10 @@ contract FundMe {
 
     function withdraw() public payable onlyOwner {
         msg.sender.transfer(address(this).balance);
+
+        for (int256 i = 0; i < funders.length; i++) {
+            addressToAmountFunded[funders[i]] = 0;
+        }
+        funders = new address[](0); //reset funders array
     }
 }
