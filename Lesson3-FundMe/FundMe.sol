@@ -46,8 +46,12 @@ contract FundMe {
         return ((ethPrice * _ethAmount) / 1000000000000000000);
     }
 
-    function withdraw() public payable {
+    modifier onlyOwner() {
         require(msg.sender == contractOwner);
+        _;
+    }
+
+    function withdraw() public payable onlyOwner {
         msg.sender.transfer(address(this).balance);
     }
 }
