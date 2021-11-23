@@ -50,7 +50,7 @@ SimpleStorage = w3.eth.contract(abi=abi, bytecode=bytecode)
 # get account current nonce
 nonce = w3.eth.getTransactionCount(my_address)
 
-# transaction built
+# Deply contract transaction built
 transaction = SimpleStorage.constructor().buildTransaction(
     {
         "gasPrice": w3.eth.gas_price,
@@ -66,3 +66,25 @@ signed_transaction = w3.eth.account.sign_transaction(
 
 tx_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
 tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+
+
+# Interacting with the contract
+simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
+
+# call() --> Simulate making the call and getting a return value
+# transact() --> Making a state change
+
+nonce = w3.eth.getTransactionCount(my_address)
+store_transaction = simple_storage.functions.store(15).buildTransaction(
+    {
+        "gasPrice": w3.eth.gas_price,
+        "chainId": chain_id,
+        "from": my_address,
+        "nonce": nonce,
+    }
+)
+signed_transaction = w3.eth.account.sign_transaction(
+    store_transaction, private_key=private_key
+)
+w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
+print(simple_storage.functions.retrieve().call())
