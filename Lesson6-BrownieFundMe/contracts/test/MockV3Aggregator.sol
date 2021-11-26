@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV2V3Interface.sol";
+import "@chainlink/contracts/src/v0.6/interfaces/AggregatorInterface.sol";
+
+import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 
 /**
  * @title MockV3Aggregator
@@ -11,7 +13,7 @@ import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV2V3Interface.sol";
  * aggregator contract, but how the aggregator got
  * its answer is unimportant
  */
-contract MockV3Aggregator is AggregatorV2V3Interface {
+contract MockV3Aggregator is AggregatorV3Interface, AggregatorInterface {
     uint256 public constant override version = 0;
 
     uint8 public override decimals;
