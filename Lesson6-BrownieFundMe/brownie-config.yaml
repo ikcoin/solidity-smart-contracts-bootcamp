@@ -14,6 +14,9 @@ networks:
   rinkeby:
     eth_usd_price_feed: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e' # PriceFeed contract address on rinkeby
     verify: True
+  mainnet-fork-dev: #brownie networks add development mainnet-fork-dev cmd=ganache-cli host=http://127.0.0.1 fork='https://eth-mainnet.alchemyapi.io/v2/uQFH44NJvSW0ArYUTMAjWGiCVJ8eXhV4' accounts=10 mnemonic=brownie port=8545
+    eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419' # PriceFeed contract address on Mainnet
+    verify: False 
   kovan:
     eth_usd_price_feed: '0xffffffffffff' # PriceFeed contract address on kovan
     verify: True
