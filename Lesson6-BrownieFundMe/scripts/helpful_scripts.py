@@ -5,10 +5,14 @@ DECIMALS = 8
 STARTING_PRICE = 200000000000
 
 LOCAL_BLOCKCHAIN_ENVIROMENTS = ["development", "ganache-local"]
+FORKED_LOCAL_ENVIROMENTS = ["mainnet-fork-dev"]
 
 
 def get_account():
-    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIROMENTS:
+    if (
+        network.show_active() in LOCAL_BLOCKCHAIN_ENVIROMENTS
+        or network.show_active() in FORKED_LOCAL_ENVIROMENTS
+    ):
         return accounts[0]
     else:
         return accounts.add(config["wallets"]["from_key"])
