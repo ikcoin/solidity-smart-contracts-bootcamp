@@ -3,6 +3,12 @@ from scripts.helpful_scripts import get_account, LOCAL_BLOCKCHAIN_ENVIROMENTS
 from scripts.deploy import deploy_fund_me
 import pytest
 
+# Network priorities when runing tests:
+#   1. Brownie Ganache Chain with Mocks: Always
+#   2. Testnet: Always (but only for integration testing)
+#   3. Brownie/Custom mainnet-fork: optional
+#   5. Self/Local Ganache: Not necessary
+
 
 def test_can_fund_and_withdraw():
     account = get_account()
