@@ -11,7 +11,7 @@ def deploy_fund_me():
     account = get_account()
 
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIROMENTS:
-        price_feed_address = config["netwoks"][network.show_active()][
+        price_feed_address = config["networks"][network.show_active()][
             "eth_usd_price_feed"
         ]
     else:  # mock
