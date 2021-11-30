@@ -3,6 +3,7 @@ from scripts.helpful_scripts import (
     LOCAL_BLOCKCHAIN_ENVIROMENTS,
     get_account,
     fund_with_link,
+    get_contract,
 )
 from scripts.deploy_lottery import deploy_lottery
 from web3 import Web3
@@ -88,7 +89,6 @@ def test_can_end_lottery():
     assert lottery.lottery_state() == 2
 
 
-"""
 def test_can_pick_winner_correctly():
     # Arrange
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIROMENTS:
@@ -105,8 +105,14 @@ def test_can_pick_winner_correctly():
     lottery.enter({"from": get_account(index=3), "value": lottery.getEntranceFee()})
 
     fund_with_link(lottery.address)
-    lottery.endLottery({"from": account})
+    tx = lottery.endLottery({"from": account})
 
+    requestId = tx.events["RequestedRandomness"]["requestId"]
+    STATIC_RNG = 777  # 777%4 = 1
+
+    get_contract("vrf_coordinator").callBackWithRandomness(
+        requestId, STATIC_RNG, lottery.address, {"from": account}
+    )
     # Assert
-    assert lottery.lottery_state() == 2
-"""
+    assert lottery.winner() == get_account(index=1)
+    assert lottery.balance() == 0
