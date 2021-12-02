@@ -21,16 +21,20 @@ networks:
     verify: True
   mainnet-fork: #brownie networks add development mainnet-fork cmd=ganache-cli host=http://127.0.0.1 fork='https://eth-mainnet.alchemyapi.io/v2/uQFH44NJvSW0ArYUTMAjWGiCVJ8eXhV4' accounts=10 mnemonic=brownie port=8545
     weth_token: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
+    dai_token: '0x6b175474e89094c44da98b954eedeac495271d0f'
     lending_pool_addresses_provider: '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5'
     eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419' # PriceFeed contract address on Mainnet
+    dai_usd_price_feed: '0x773616E4d11A78F511299002da57A0a94577F1f4' # PriceFeed contract address on Mainnet
     verify: False 
   mainnet-fork-dev: #brownie networks add development mainnet-fork-dev cmd=ganache-cli host=http://127.0.0.1 fork='https://eth-mainnet.alchemyapi.io/v2/uQFH44NJvSW0ArYUTMAjWGiCVJ8eXhV4' accounts=10 mnemonic=brownie port=8545
     eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419' # PriceFeed contract address on Mainnet
     verify: False 
   kovan:
     weth_token: '0xd0a1e359811322d97991e03f863a0c30c2cf029c'
+    dai_token: '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
     eth_usd_price_feed: '0xffffffffffff' # PriceFeed contract address on kovan
     lending_pool_addresses_provider: '0x88757f2f99175387aB4C6a4b3067c77A695b0349'
+    dai_usd_price_feed: '0x22B58f1EbEDfCA50feF632bD73368b2FdA96D541'
     verify: True
   ganache-local:
     verify: False
