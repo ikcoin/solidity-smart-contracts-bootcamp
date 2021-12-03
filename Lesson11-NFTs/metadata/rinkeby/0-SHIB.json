@@ -1,0 +1,11 @@
+{
+    "name": "Shib",
+    "description": "An adorable Shiba Inu!",
+    "image": "https://ipfs.io/ipfs/QmXm2FmMfwk7gtDzwXcJR57mm4AoZPAMRi4cEnQPPDg39d?filename=1WWMDwIQ_400x400.jpg",
+    "attributes": [
+        {
+            "trait_type": "cuteness",
+            "value": 100
+        }
+    ]
+}
