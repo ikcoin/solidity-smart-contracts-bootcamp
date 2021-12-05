@@ -1,0 +1,48 @@
+dependencies:
+  # - <organization/repo>@<version>
+  - smartcontractkit/chainlink-brownie-contracts@1.1.1
+  - OpenZeppelin/openzeppelin-contracts@4.1.0
+  - aave/protocol-v2@1.0.1
+
+compiler:
+  solc:
+    remappings:
+      - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.1.0'
+      - '@aave=aave/protocol-v2@1.0.1'
+
+
+dotenv: .env
+
+networks:
+  #default: mainnet-fork
+  rinkeby:
+    eth_usd_price_feed: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e' # PriceFeed contract address on rinkeby
+    vrf_coordinator: '0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B' # VRF Coordinator contract address on rinkeby
+    link_token: '0x01BE23585060835E02B77ef475b0Cc51aA1e0709' # LINK contract address on rinkeby
+    key_hash: '0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311'
+    fee: 100000000000000000 #0.1
+    verify: True
+  mainnet-fork: #brownie networks add development mainnet-fork cmd=ganache-cli host=http://127.0.0.1 fork='https://eth-mainnet.alchemyapi.io/v2/uQFH44NJvSW0ArYUTMAjWGiCVJ8eXhV4' accounts=10 mnemonic=brownie port=8545
+    eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419' # PriceFeed contract address on Mainnet
+    vrf_coordinator: '0xf0d54349aDdcf704F77AE15b96510dEA15cb7952' # VRF Coordinator contract address on mainnet
+    link_token: '0x514910771af9ca656af840dff83e8264ecf986ca' # LINK contract address on mainnet
+    key_hash: '0xAA77729D3466CA35AE8D28B3BBAC7CC36A5031EFDC430821C02BC31A238AF445'
+    fee: 100000000000000000 #0.1
+    verify: False 
+  mainnet-fork-dev: #brownie networks add development mainnet-fork-dev cmd=ganache-cli host=http://127.0.0.1 fork='https://eth-mainnet.alchemyapi.io/v2/uQFH44NJvSW0ArYUTMAjWGiCVJ8eXhV4' accounts=10 mnemonic=brownie port=8545
+    eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419' # PriceFeed contract address on Mainnet
+    verify: False 
+  kovan:
+    eth_usd_price_feed: '0xffffffffffff' # PriceFeed contract address on kovan
+    verify: True
+  ganache-local:
+    verify: False
+  
+  development:
+    key_hash: '0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311'
+    fee: 100000000000000000 #0.1
+    verify: False
+
+wallets: 
+  from_key: ${PRIVATE_KEY}
