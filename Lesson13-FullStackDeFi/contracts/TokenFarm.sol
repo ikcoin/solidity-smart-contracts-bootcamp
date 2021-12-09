@@ -37,7 +37,7 @@ contract TokenFarm is Ownable {
 
     function getUserTotalValue(address _user) public returns (uint256) {
         uint256 totalValue = 0;
-        require(uniqueTokensStaked[_user] >= 0);
+        require(uniqueTokensStaked[_user] > 0);
         for (uint256 i = 0; i < allowedTokens.length; i++) {
             totalValue += getUserSingleTokenValue(_user, allowedTokens[i]);
         }
@@ -85,7 +85,8 @@ contract TokenFarm is Ownable {
 
     function updateUniqueTokensStaked(address _user, address _token) internal {
         if (stakingBalance[_token][_user] <= 0) {
-            uniqueTokensStaked[_user] += 1;
+            //uniqueTokensStaked[_user] += 1;
+            uniqueTokensStaked[_user] = uniqueTokensStaked[_user] + 1;
         }
     }
 
@@ -93,8 +94,8 @@ contract TokenFarm is Ownable {
         require(_amount > 0, "Amount must be more than 0.");
         require(tokenIsAllowed(_token), "This token is not Allowed");
         IERC20(_token).transferFrom(msg.sender, address(this), _amount);
-        stakingBalance[_token][msg.sender] += _amount;
         updateUniqueTokensStaked(msg.sender, _token);
+        stakingBalance[_token][msg.sender] += _amount;
         if (uniqueTokensStaked[msg.sender] == 1) {
             //is the first staking time
             stakers.push(msg.sender);
